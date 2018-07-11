@@ -10,11 +10,37 @@ não do objeto, mas da classe.**
 
 ![REFLECTION](DOCS/reflection.png)
 
+### Formas de obter instâncias de Class
 
-Apesar de tipos primitivos em Java não serem considerados classes, é possível
+- Referências Estáticas;      
+- Recuperando a classe de um objeto;
+- Uma String com o nome da classe;
+
+Exemplo usando Referências Estáticas:
+
+```java    
+    Class<String> classe = String.class;
+    System.out.println(classe.getName());
+```
+
+Exemplo recuperando a classe de um objeto:
+
+```java    
+   Number object = new Integer(100);
+   Class<? extends Number> c = object.getClass();
+```
+
+Exemplo usando String com o nome da classe:
+
+```java    
+   Class<?> classe = Class.forName("br.com.teste.Classe");
+```
+    
+***Dica: Apesar de tipos primitivos em Java não serem considerados classes, é possível
 obter uma representação de Class para eles. Para isso, a referência estática des-
 ses tipos pode ser utilizada, como por exemplo int.class e char.class . Até
-mesmo o void possui uma representação de Class, sendo obtido através da expressão void.class .
+mesmo o void possui uma representação de Class, sendo obtido através da expressão void.class.***
+
 
 ### Quando criar objetos utilizando reflexão?
 
@@ -26,3 +52,17 @@ pode ser utilizado para determinar a classe que será criada. A criação de
 objetos através de reflexão é indicada quando se deseja que novas clas-
 ses possam ser criadas e configuradas como plugins de um software ou
 framework existente.
+
+### Cuidado com os tipos primitivos!
+
+Os tipos primitivos são uma grande pedra no sapado de quem traba-
+lha com reflexão. Apesar do seu tipo ser representado pela classe Class ,
+muitas vezes é preciso fazer a distinção dos tipos primitivos e tratá-los
+como casos especiais. O exemplo da busca de construtores é um caso
+em que os tipos primitivos precisariam ser tratados separadamente, tro-
+cando seu tipo pelo de uma classe wrapper ou utilizando um condicional
+para cada tipo primitivo. Sendo assim, não se incomode ao ter que criar
+uma séria de condicionais para tratar de forma especial cada um dos ti-
+pos primitivos, pois nos frameworks que desenvolvi precisei fazer isso
+algumas vezes.
+
