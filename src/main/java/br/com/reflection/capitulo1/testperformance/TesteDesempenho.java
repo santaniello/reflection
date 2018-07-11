@@ -1,4 +1,4 @@
-package br.com.reflection.testperformance;
+package br.com.reflection.capitulo1.testperformance;
 
 public class TesteDesempenho {
     public static void main(String[] args){

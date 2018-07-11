@@ -1,4 +1,4 @@
-package br.com.reflection.testperformance;
+package br.com.reflection.capitulo1.testperformance;
 
 import java.lang.reflect.Method;
 

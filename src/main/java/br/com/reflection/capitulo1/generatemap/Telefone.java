@@ -1,4 +1,4 @@
-package br.com.reflection.generatemap;
+package br.com.reflection.capitulo1.generatemap;
 
 public class Telefone {
     private String codigoPais;

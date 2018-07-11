@@ -1,7 +1,7 @@
-package br.com.reflection.testperformance;
+package br.com.reflection.capitulo1.testperformance;
 
-import br.com.reflection.generatemap.Ignorar;
-import br.com.reflection.generatemap.NomePropriedade;
+import br.com.reflection.capitulo1.generatemap.Ignorar;
+import br.com.reflection.capitulo1.generatemap.NomePropriedade;
 
 import java.lang.reflect.Method;
 import java.util.HashMap;
@@ -12,16 +12,15 @@ public class GeradorMapaPerformance {
     private Class<?> classe;
     public GeradorMapaPerformance(Class<?> classe) {
         this.classe = classe;
-        for (Method m : classe.getMethods()) {
-            if (isGetter(m)) {
+        for (Method method : classe.getMethods()) {
+            if (isGetter(method)) {
                 String propriedade = null;
-                if (m.isAnnotationPresent(NomePropriedade.class)) {
-                    propriedade = m.getAnnotation(NomePropriedade.class)
-                            .value();
+                if (method.isAnnotationPresent(NomePropriedade.class)) {
+                    propriedade = method.getAnnotation(NomePropriedade.class).value();
                 } else {
-                    propriedade = fromGetterToPropertie(m.getName());
+                    propriedade = fromGetterToPropertie(method.getName());
                 }
-                propriedades.put(propriedade, m);
+                propriedades.put(propriedade, method);
             }
         }
     }
@@ -38,8 +37,7 @@ public class GeradorMapaPerformance {
                 Object valor = m.invoke(o);
                 mapa.put(propriedade, valor);
             } catch (Exception e) {
-                throw
-                        new RuntimeException("Problema ao gerar o mapa", e);
+                throw new RuntimeException("Problema ao gerar o mapa", e);
             }
         }
         return mapa;
@@ -52,12 +50,12 @@ public class GeradorMapaPerformance {
      *  não possui parâmetros. Caso o método seja identificado como getter, ele é invocado
      *  a partir do método invoke() e seu valor recuperado para ser inserido no mapa.
      * */
-    private static boolean isGetter(Method m) {
-        return m.getName().startsWith("get") &&
-                m.getReturnType() != void.class &&
-                m.getParameterTypes().length == 0 &&
-                // verifica se a anotação @Ignorar não está presente
-                !m.isAnnotationPresent(Ignorar.class);
+    private static boolean isGetter(Method method) {
+        return method.getName().startsWith("get") &&
+               method.getReturnType() != void.class &&
+               method.getParameterTypes().length == 0 &&
+               // verifica se a anotação @Ignorar não está presente
+               !method.isAnnotationPresent(Ignorar.class);
     }
 
     /*

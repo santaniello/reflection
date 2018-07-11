@@ -1,8 +1,9 @@
-package br.com.reflection.generatemap;
+package br.com.reflection.capitulo1.generatemap;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 @Retention(RetentionPolicy.RUNTIME)
-public @interface Ignorar {
+public @interface NomePropriedade {
+String value();
 }
