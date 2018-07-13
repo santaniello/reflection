@@ -53,6 +53,8 @@ objetos através de reflexão é indicada quando se deseja que novas clas-
 ses possam ser criadas e configuradas como plugins de um software ou
 framework existente.
 
+-------------------------------------------------------------------------------------------
+
 ### Cuidado com os tipos primitivos!
 
 Os tipos primitivos são uma grande pedra no sapado de quem traba-
@@ -66,3 +68,21 @@ uma séria de condicionais para tratar de forma especial cada um dos ti-
 pos primitivos, pois nos frameworks que desenvolvi precisei fazer isso
 algumas vezes.
 
+------------------------------------------------------------------------------------
+
+### Quando executar métodos por reflexão ?
+
+A orientação a objetos provê meios de você invocar métodos em um
+objeto que você não conhece previamente. Isso pode ser feito definindo
+uma abstração, como uma interface ou uma classe, que possua essa mé-
+todo e utilizando o polimorfismo para invocar esse método em qualquer
+objeto que obedeça a essa abstração. Nesses casos, quando é possível ter
+uma abstração que representa o método que deve ser invocado, a reflexão
+não precisa ser utilizada. Por outro lado, se você precisa lidar com clas-
+ses que possuem métodos diferentes e não faz sentido compartilharem
+uma mesma abstração, essa é a deixa para a invocação desses métodos
+por reflexão. Um bom exemplo desse caso são os Java Beans, que pos-
+suem diversos métodos getter e setter diferentes e não é possível criar
+uma interface comum que capture essa característica.
+
+------------------------------------------------------------------------------------
