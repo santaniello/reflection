@@ -5,6 +5,8 @@ public class ExemploClasse {
     private String privado;
     public static String estatico;
 
+    public ExemploClasse(){}
+
     public ExemploClasse(String publico, String privado, String estatico){
         this.publico = publico;
         this.privado = privado;
@@ -18,7 +20,4 @@ public class ExemploClasse {
     public void testeComParametro(String parametro1,Integer parametro2){
         System.out.println("Método executado com sucesso !: "+ parametro1 + " - " + parametro2);
     }
-
-
-
 }
