@@ -10,6 +10,7 @@ import java.util.Map;
 public class GeradorMapaPerformance {
     private Map<String, Method> propriedades = new HashMap<>();
     private Class<?> classe;
+
     public GeradorMapaPerformance(Class<?> classe) {
         this.classe = classe;
         for (Method method : classe.getMethods()) {
