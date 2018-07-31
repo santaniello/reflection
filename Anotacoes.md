@@ -7,6 +7,74 @@ aos metadados, porém não é qualquer classe que é aceita como tipo do atribut
 Porém uma anotação não pode possuir comportamento, sendo uma informação es-
 tática que é adicionada a classes.
 
+
+### Definição de metadados
+
+No contexto da orientação a objetos, os metadados são informações sobre os
+elementos do código. Essas informações podem ser definidas em qualquer meio,
+bastando que o software ou componente as recupere e as utilize para agregar novas
+informações nos elementos do código.
+
+Existem algumas maneiras de se obter os metadados para que um determinado 
+código (framework funcione):
+
+- Convenções de código;
+
+Exemplo: utilizando os métodos getters e setters de uma classe.
+
+- Fontes Externas;
+
+Exemplo: Arquivos XML.
+
+```xml
+<hibernate-mapping>
+    <class name="com.casadocodigo.Usuario" table="USUARIO">
+        <id column="USER_ID" name="id" type="java.lang.Long">
+            <generator class="org.hibernate.id.TableHiLoGenerator">
+                <param name="table">idgen</param>
+                <param name="column">NEXT</param>
+            </generator>
+        </id>
+        <property column="LOGIN" name="login" type="java.lang.String"/>
+        <property column="SENHA" name="senha" type="java.lang.String"/>
+        <property column="NASCIMENTO" name="dataNascimento" type="java.util.Date"/>
+    </class>
+</hibernate-mapping>
+``` 
+
+Uma das principais vantagens deste tipo de abordagem, é o fato de os metadados poderem ser 
+atualizados em Runtime (on the fly) sem precisar reestartar a aplicação.
+
+***Uma das desvantagens da definição de metadados em fontes externas é que os da-
+dos precisam referenciar os elementos do código tornando essa configuração tediosa
+e sujeita a erros, principalmente se não houver uma ferramenta de apoio.***
+
+- Anotações
+
+As anotações são um recurso da linguagem Java introduzidas na JDK 5 para per-
+mitir a adição de metadados diretamente no código.
+
+Elas podem ser utilizadas em conjunto com outras fontes de metadados (como por exemplo o XML).  
+
+
+***Uma das desvantagens das anotações Quando elas são utilizadas, para a alteração dos metadados é
+   necessário recompilar as classes, o que pode não ser viável para ajustes em tempo
+   de implantação ou alteração em tempo de execução. Isso também pode dificultar a
+   reutilização da classe em um contexto em que as anotações não sejam necessárias ou
+   que outros metadados precisem ser configurados.***
+   
+***Misturando mecanismos de definição de metadados
+   Como pode ser visto, cada forma de definição de metadados possui
+   suas vantagens e desvantagens, e muitas vezes fica difícil equilibrar os re-
+   quisitos a partir de uma das formas. Por exemplo, enquanto as anotações
+   oferecem uma forma menos verbosa de definir os metadados, as fontes
+   de dados externas permitem a alteração dos metadados sem a recom-
+   pilação das classes. Felizmente, os componentes não precisam escolher
+   apenas uma forma de definição de metadados, sendo possível combi-
+   nar metadados de diferentes fontes. O capítulo ?? fala como estruturar
+   o componente para permitir a combinação de metadados de diferentes
+   fontes.***   ,
+
 ### Definindo até quando a anotação está disponível
 
 Uma das principais configurações de uma anotação é até quando ela vai estar
@@ -64,4 +132,3 @@ em um atributo.
 @Target({ElementType.METHOD, ElementType.FIELD})
 public @interface Metadado{}
 ```
-
